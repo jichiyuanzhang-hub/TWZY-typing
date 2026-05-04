@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>注音打字練習</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <canvas id="particleBackground" class="particle-background" aria-hidden="true"></canvas>
+    <main class="app-shell">
+      <section class="practice-panel" aria-labelledby="app-title">
+        <div class="masthead">
+          <div>
+            <p class="eyebrow">台灣繁體 · 注音輸入</p>
+            <h1 id="app-title">注音打字練習</h1>
+          </div>
+          <div class="masthead-actions">
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="切換為黑夜模式" title="切換為黑夜模式">
+              <span id="themeIcon" aria-hidden="true">☀</span>
+            </button>
+            <img class="masthead-art" src="assets/zhuyin-keys.svg" alt="注音鍵盤示意圖">
+          </div>
+        </div>
+
+        <div class="toolbar" aria-label="練習設定">
+          <label>
+            課程
+            <select id="lessonSelect"></select>
+          </label>
+          <label>
+            模式
+            <select id="modeSelect">
+              <option value="hanzi">打繁體字</option>
+              <option value="zhuyin">打注音符號</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="stats" aria-label="練習統計">
+          <div>
+            <span id="accuracyStat">100%</span>
+            <small>正確率</small>
+          </div>
+          <div>
+            <span id="speedStat">0</span>
+            <small>CPM</small>
+          </div>
+          <div>
+            <span id="timeStat">0:00</span>
+            <small>時間</small>
+          </div>
+          <div>
+            <span id="streakStat">0</span>
+            <small>連續</small>
+          </div>
+        </div>
+
+        <section class="prompt-area" aria-label="目前題目">
+          <div class="prompt-meta">
+            <span id="lessonName"></span>
+            <span id="progressText"></span>
+          </div>
+          <div id="zhuyinPrompt" class="zhuyin-line" aria-label="注音提示"></div>
+          <div id="targetPrompt" class="target-line" aria-label="目標文字"></div>
+        </section>
+
+        <label class="typing-box">
+          <span id="inputLabel">請用注音輸入法打出上方繁體字</span>
+          <textarea id="typingInput" rows="4" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+        </label>
+
+        <div class="feedback-row">
+          <p id="feedbackText" aria-live="polite">選一個課程，開始輸入後會自動計時。</p>
+          <div class="action-buttons">
+            <button id="resetButton" type="button">重新開始</button>
+            <button id="nextButton" type="button">下一題</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="reference-panel" aria-label="虛擬台灣注音鍵盤">
+        <h2>虛擬台灣鍵盤</h2>
+        <div class="key-grid" id="keyGrid"></div>
+        <div class="tone-guide">
+          <h3>聲調</h3>
+          <p>按下實體鍵盤時，右側對應鍵會亮一下。台灣注音常用 6 輸入二聲 ˊ，3 輸入三聲 ˇ，4 輸入四聲 ˋ，7 輸入輕聲 ˙。</p>
+        </div>
+      </aside>
+    </main>
+
+    <div id="completionModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="completionTitle" hidden>
+      <section class="completion-modal">
+        <h2 id="completionTitle">恭喜完成挑戰</h2>
+        <div class="completion-stats" aria-label="詳細數據">
+          <div>
+            <span id="modalAccuracy">100%</span>
+            <small>正確率</small>
+          </div>
+          <div>
+            <span id="modalTime">0:00</span>
+            <small>時間</small>
+          </div>
+          <div>
+            <span id="modalSpeed">0</span>
+            <small>CPM</small>
+          </div>
+          <div>
+            <span id="modalCompleted">0</span>
+            <small>完成題數</small>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button id="leaveButton" class="modal-button leave-button" type="button">離開</button>
+          <button id="modalRestartButton" class="modal-button restart-button" type="button">重新開始</button>
+          <button id="nextSectionButton" class="modal-button next-section-button" type="button">下一部分</button>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
